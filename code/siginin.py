@@ -78,17 +78,14 @@ def main(web_name):
     try:
         session = sign_in(web_name)  # 登录
         if web_name in ['HDSky', 'OpenCD', 'HDChina']:  # 如果需要验证码
-            #print('正在获取图片链接！')
             imgurl, imageHash = get_imgurl(web_name, session)  # 获取图片url
             #print(imgurl, imageHash)
             with open('temp.png', 'wb') as f:
                 f.write(session.post(imgurl).content)  # 写入图片
-            print('正在使用神经网络！')
             predictlabel = predict(Image.open('temp.png'))  # 使用神经网络预测验证码
             print(predictlabel)
             print('正在构建验证码data！')
             data = submitdata(web_name, imageHash, predictlabel)  # 构建提交验证码的数据
-            print(data)
             s = session.post(post_submit[web_name], headers=headers, data=data)    # 提交验证码
         else:
             print('正在构建data！')
