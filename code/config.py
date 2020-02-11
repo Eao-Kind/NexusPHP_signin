@@ -2,7 +2,6 @@ import os
 import re
 
 
-# 需要签到的网站
 neednamelist = ['btschool']
 
 
@@ -13,8 +12,8 @@ headers = {
 
 # 请求验证码的url，只有需要url_img的网址才会用到这个
 checkin_php = {
-    'HDSky': 'https://hdsky.me/image_code_ajax.php',
-    'OpenCD': 'https://www.open.cd/plugin_sign-in.php', }
+    'HDSky': '？？',
+    'OpenCD': '？？？plugin_sign-in.php', }
 
 
 # 获取验证码hash的表单数据，只有需要url_img的网址才会用到这个
@@ -25,8 +24,8 @@ date = {
 
 # 提交验证码url，只有需要url_img的网址才会用到这个
 post_submit = {
-    'HDSky': 'https://hdsky.me/showup.php',
-    'OpenCD':'https://www.open.cd/plugin_sign-in.php?cmd=signin', }
+    'HDSky': '？？？showup.php',
+    'OpenCD':'？？？plugin_sign-in.php?cmd=signin', }
 
 
 # 用于组合图片地址
@@ -37,7 +36,7 @@ url_img = {
 
 # 用于签到
 signin_ok = {
-    'btschool': 'http://pt.btschool.club/index.php?action=addbonus',
+    'btschool': '？？？index.php?action=addbonus',
 }
 
 
