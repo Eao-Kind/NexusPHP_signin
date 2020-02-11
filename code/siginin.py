@@ -55,21 +55,21 @@ def decide_if_signin_ok(web_name, s):
     print("判断是否成功还未写好")
 
 
-# 获取图片链接，返回Hash和url
+
 def get_imgurl(web_name, session):
-    if web_name == 'OpenCD':  #因为OpenCD不需要data
-        req = session.post(checkin_php[web_name], headers=headers)  # 模拟请求获取Hash值
+    if web_name == 'OpenCD':  
+        req = session.post(checkin_php[web_name], headers=headers)  
     else:
-        data = json.loads(date[web_name])  # 获取需要发生的data
+        data = json.loads(date[web_name])  # 获取需要发送的data
         # print(data, type(data))
-        req = session.post(checkin_php[web_name], headers=headers, data=data)  # 模拟请求获取Hash值
+        req = session.post(checkin_php[web_name], headers=headers, data=data)  
     #print(req.text)
     if web_name == 'HDSky':
         listimageHash = re.findall('.*?code":"(.*?)"', req.text)  # 提取Hash列表
     elif web_name == 'OpenCD':
         listimageHash = re.findall('.*?imagehash=(.*?)" border="0"/>', req.text)  # 提取Hash列表
     imageHash = "".join(listimageHash)  # 列表转换为字符串
-    imgurl = url_img[web_name] + '/image.php?action=regimage&imagehash=' + imageHash  # 组合url链接
+    imgurl = url_img[web_name] + '/image.php?action=regimage&imagehash=' + imageHash  
     return imgurl, imageHash
 
 
