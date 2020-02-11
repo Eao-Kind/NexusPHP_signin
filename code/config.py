@@ -52,12 +52,12 @@ MAX_CAPTCHA = 6
 def cookies(web_name):
     with open(web_name, 'r') as f:
         lnum, data = 0, '#LWP-Cookies-2.0\n'   # 从饼干获取到的格式头不对，此处进行替换
-        temp = f.readlines()  # 由于只能使用一次读行，所有要设计一个变量保存读到的内容， 列表
+        temp = f.readlines()  
         if temp[0] == "// Semicolon separated Cookie File\n":  # 判断是否未处理的文本:
             for line in temp[4:]:
                 #print(line)
                 data += line
-            temp = re.sub('expires="(.*?)"', 'expires="2038-01-19 03:14:07Z"', data)  # 替换expires内容
+            temp = re.sub('expires="(.*?)"', 'expires="2038-01-19 03:14:07Z"', data)  
             f.close()
             with open(web_name, 'w') as f:
                 f.write(temp)
