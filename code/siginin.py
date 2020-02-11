@@ -5,9 +5,8 @@ import re
 import json
 
 
-# 加载cookies到会话
 def sign_in(web_name):
-    bt_Session = requests.session()  # 创建一个会话
+    bt_Session = requests.session()  
     os.chdir('../cookies')           # 切换到cookie目录
     try:
         bt_Session.cookies = cookielib.LWPCookieJar(filename=web_name + '.txt')
@@ -18,9 +17,6 @@ def sign_in(web_name):
     except:
         print("{}的cookies加载失败".format(web_name))
         return None
-
-
-# 构建提交验证码的表单 or  无需验证码的表单
 
 
 def submitdata(web_name, imagehash, predictlabel):
@@ -69,9 +65,9 @@ def get_imgurl(web_name, session):
         req = session.post(checkin_php[web_name], headers=headers, data=data)  # 模拟请求获取Hash值
     #print(req.text)
     if web_name == 'HDSky':
-        listimageHash = re.findall('.*?code":"(.*?)"', req.text)  # 提取Hash列表——天空
+        listimageHash = re.findall('.*?code":"(.*?)"', req.text)  # 提取Hash列表
     elif web_name == 'OpenCD':
-        listimageHash = re.findall('.*?imagehash=(.*?)" border="0"/>', req.text)  # 提取Hash列表——皇后
+        listimageHash = re.findall('.*?imagehash=(.*?)" border="0"/>', req.text)  # 提取Hash列表
     imageHash = "".join(listimageHash)  # 列表转换为字符串
     imgurl = url_img[web_name] + '/image.php?action=regimage&imagehash=' + imageHash  # 组合url链接
     return imgurl, imageHash
@@ -105,4 +101,4 @@ def main(web_name):
 
 if __name__ == '__main__':
     for web_name in neednamelist:
-        session = sign_in(web_name)  # 登录
+        session = sign_in(web_name)  
