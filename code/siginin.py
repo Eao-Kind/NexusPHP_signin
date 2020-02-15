@@ -35,7 +35,7 @@ def submitdata(web_name, imagehash, predictlabel):
         date = {
             'action': 'addbonus',
         }
-
+"""
     elif web_name == 'HDChina':
         date = {
             'csrf': '812f2ecf1a6db185468944c748ed9b412d551143',
@@ -45,6 +45,7 @@ def submitdata(web_name, imagehash, predictlabel):
             'signed_timestamp': '1581092163',
             'signed_token': '844ffc6e53e89f4d70e65f6161e74600',
         }
+        """
     else:
         return None
     return date
@@ -98,4 +99,4 @@ def main(web_name):
 
 if __name__ == '__main__':
     for web_name in neednamelist:
-        session = sign_in(web_name)  
+        main(web_name)  
