@@ -31,21 +31,6 @@ def submitdata(web_name, imagehash, predictlabel):
             'imagehash': imagehash,
             'imagestring': predictlabel,
         }
-    elif web_name == 'btschool':
-        date = {
-            'action': 'addbonus',
-        }
-"""
-    elif web_name == 'HDChina':
-        date = {
-            'csrf': '812f2ecf1a6db185468944c748ed9b412d551143',
-        }
-    elif web_name == 'TTG':
-        date = {
-            'signed_timestamp': '1581092163',
-            'signed_token': '844ffc6e53e89f4d70e65f6161e74600',
-        }
-        """
     else:
         return None
     return date
@@ -54,7 +39,6 @@ def submitdata(web_name, imagehash, predictlabel):
 # 判断是否签到成功  不同站点有差别，暂时未适配
 def decide_if_signin_ok(web_name, s):
     print("判断是否成功还未写好")
-
 
 
 def get_imgurl(web_name, session):
