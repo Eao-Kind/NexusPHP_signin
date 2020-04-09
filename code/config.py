@@ -1,7 +1,6 @@
 import os
 import re
 
-
 # 需要签到的网站
 neednamelist = ['OpenCD']
 
@@ -10,6 +9,7 @@ headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36',
 }
 
+neednamelist = ['OpenCD']
 
 
 # 请求验证码的url，只有需要url_img的网址才会用到这个
@@ -33,7 +33,7 @@ post_submit = {
 # 用于组合图片地址
 url_img = {
     'OpenCD': 'https://www.open.cd/',
-    'HDSky': '',
+
 }
 
 
@@ -41,6 +41,7 @@ url_img = {
 signin_ok = {
     'btschool': 'http://pt.btschool.club/index.php?action=addbonus',
     'OpenCD': 'https://www.open.cd/plugin_sign-in.php?cmd=signin'
+
 }
 
 
@@ -62,6 +63,7 @@ def cookies(web_name):
                 #print(line)
                 data += line
             temp = re.sub('expires="(.*?)"', 'expires="2038-01-19 03:14:07Z"', data)  # 替换expires内容
+
             f.close()
             with open(web_name, 'w') as f:
                 f.write(temp)
