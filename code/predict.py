@@ -7,11 +7,18 @@ import numpy as np
 from config import *
 
 
+<<<<<<< HEAD
 # 处理图片
 transforms = transforms.Compose([
         #transforms.Grayscale(), #灰度
         transforms.ToTensor(),  # range [0, 255] -> [0.0,1.0]，自动每个数/255
         #transforms.Normalize(mean=[0.5], std=[0.5])#单通道
+=======
+transforms = transforms.Compose([
+        #transforms.Grayscale(), 
+        transforms.ToTensor(),  
+        #transforms.Normalize(mean=[0.5], std=[0.5])
+>>>>>>> origin/master
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
 
@@ -47,6 +54,7 @@ class VGG(nn.Module):
 
 
 def predict(image):
+<<<<<<< HEAD
     my_cnn = VGG() #加载网络
     if torch.cuda.is_available():
         my_cnn.cuda()
@@ -54,6 +62,15 @@ def predict(image):
     image = transforms(image)  # 这里经过转换后输出的input格式是[C,H,W],网络输入还需要增加一维批量大小B
     image = image.unsqueeze(0)  # 增加一维，输出的img格式为[1,C,H,W]
     vimage = Variable(image).cuda()  # 转换一下 才可以反向,预测
+=======
+    my_cnn = VGG() 
+    if torch.cuda.is_available():
+        my_cnn.cuda()
+    my_cnn.load_state_dict(torch.load('16pt.pth'))  
+    image = transforms(image)  # 这里经过转换后输出的input格式是[C,H,W],网络输入还需要增加一维批量大小B
+    image = image.unsqueeze(0)  # 增加一维，输出的img格式为[1,C,H,W]
+    vimage = Variable(image).cuda()  
+>>>>>>> origin/master
     predict_label = my_cnn(vimage)
     c0 = ALL_CHAR_SET[np.argmax(predict_label[0, 0:  ALL_CHAR_SET_LEN].data.cpu().numpy())]
     c1 = ALL_CHAR_SET[np.argmax(predict_label[0, 1 * ALL_CHAR_SET_LEN:2 * ALL_CHAR_SET_LEN].data.cpu().numpy())]
