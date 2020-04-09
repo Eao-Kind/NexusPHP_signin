@@ -14,8 +14,8 @@ neednamelist = ['OpenCD']
 
 # 请求验证码的url，只有需要url_img的网址才会用到这个
 checkin_php = {
-    'HDSky': 'https://hdsky.me/image_code_ajax.php',
-    'OpenCD': 'https://www.open.cd/plugin_sign-in.php', }
+    'HDSky': 'https://h?????/image_code_ajax.php',
+    'OpenCD': 'https://www.op????cd/plugin_sign-in.php', }
 
 
 # 获取验证码hash的表单数据，只有需要url_img的网址才会用到这个
@@ -26,21 +26,21 @@ date = {
 
 # 提交验证码url，只有需要url_img的网址才会用到这个
 post_submit = {
-    'HDSky': 'https://hdsky.me/showup.php',
-    'OpenCD':'https://www.open.cd/plugin_sign-in.php?cmd=signin', }
+    'HDSky': 'https://hd??????e/showup.php',
+    'OpenCD':'https://www.o????/plugin_sign-in.php?cmd=signin', }
 
 
 # 用于组合图片地址
 url_img = {
-    'OpenCD': 'https://www.open.cd/',
+    'OpenCD': 'https://www.o????.cd/',
 
 }
 
 
 # 用于签到
 signin_ok = {
-    'btschool': 'http://pt.btschool.club/index.php?action=addbonus',
-    'OpenCD': 'https://www.open.cd/plugin_sign-in.php?cmd=signin'
+    'btschool': 'http://pt.b?????l.club/index.php?action=addbonus',
+    'OpenCD': 'https://www.o???????/plugin_sign-in.php?cmd=signin'
 
 }
 
