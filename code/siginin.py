@@ -1,6 +1,5 @@
 import http.cookiejar as cookielib
 import json
-import re
 
 import requests
 
@@ -106,7 +105,7 @@ def main(web_name):
         else:
             print('正在构建data！')
             data = submitdata(web_name, None, None)
-            s = session.get(signin_ok[web_name], data=data)  # 提交签到
+            s = session.post(signin_ok[web_name], data=data)  # 提交签到
         decide_if_signin_ok(web_name, s)  # 判断是否签到成功
     except:
         print("{}签到出错".format(web_name))
