@@ -162,7 +162,7 @@ class HDSky:
         if res["success"]:  # 成功
             msg = "本次签到获得魔力值：" + str(res["message"])
         elif not res["success"]:
-            msg = "今天已经签到过了"
+            msg = "图片识别识别或今天已经签到过了"
         else:
             msg = "签到失败，原因未知,可能是图片识别错误，请根据签到图片地址和图片识别结果查看"
         return msg
