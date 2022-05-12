@@ -12,3 +12,5 @@ PT站自动签到，使用VGG识别验证码
   2.在config.py文件里，把 ？？？ 替换为 站点链接；添加需要签到的站点到needwebnamelist=[]，并运行一下config.py 把小饼干导出的格式转换为符合使用的格式 
   
   3.运行signin.py  
+
+拉取命令 > ql repo https://github.com/Eao-Kind/NexusPHP_signin.git  "ck_|ins_" "" "util|sendNotify" "master"
