@@ -29,7 +29,7 @@ class BirdIeSearch:
 
     def check(self):
         # 测试cookie是否有效
-        r = requests.get(self.url, headers=self.headers)
+        r = requests.get(self.url, headers=self.headers, verify=False)
         r.encoding = "utf-8"
         # print(r.text)
         html = re.match('.*登录帐号：(.*?)', r.text, re.S)
