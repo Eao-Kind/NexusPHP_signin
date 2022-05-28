@@ -48,10 +48,29 @@ class BirdIeSearch:
             print(msg)
 
     def get_cookie_by_requests(self):
-        return "test"
+        sess = requests.Session()
+        html = sess.post(self.url, headers=self.headers).text
+        form_data = {
+            'username': self.username,
+            'password': self.password,
+        }
+        html = sess.post(self.check_items["signUrl"], data=form_data)
+        print(html.text)
+        cookie = sess.cookies
+        cookie_list = cookie.get_dict()
+        cookie = [item + '=' + cookie_list[item] for item in cookie_list]
+        new_cookie = '; '.join(item for item in cookie)
+        print(new_cookie)
+        msg = modify_cookie(self.__class__.__name__ + "Cookie", new_cookie)
+        return msg
 
     def main(self):
+        global j
         msg_all = ""
+        j += 1
+        if j > 3:  # 防止由于识别出错而导致一直递归
+            print("连续失败多次，cookie可能更新不成功！")
+            exit(1)
         if not self.check():
             msg = "cookie失效或网站暂时无法访问,开始使用登录更新cookie....."
             print(msg)
@@ -67,6 +86,7 @@ class BirdIeSearch:
 
 
 if __name__ == '__main__':
+    j = 1
     data = get_data()
     _check_items = data.get("BirdIeSearch", [])
     meg = BirdIeSearch(check_items=_check_items).main()
