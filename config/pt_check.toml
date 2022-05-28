@@ -1,0 +1,58 @@
+[BaiDuAPI]
+APP_ID = ''
+API_KEY = ''
+SECRET_KEY = ''
+
+[HDSky]
+url = "https://hdsky.me"
+imgUrl = "https://hdsky.me/image.php?action=regimage&imagehash="
+signUrl = "https://hdsky.me/takelogin.php"
+username = ""
+password = "."
+# 浏览器select
+nameSelect = "#nav_block > form:nth-child(4) > table > tbody > tr:nth-child(1) > td.rowfollow > input[type=text]"
+passwordSelect = "#nav_block > form:nth-child(4) > table > tbody > tr:nth-child(2) > td.rowfollow > input[type=password]"
+verificationSelect = "#nav_block > form:nth-child(4) > table > tbody > tr:nth-child(5) > td:nth-child(2) > input[type=text]:nth-child(1)"
+submitSelect = " #nav_block > form:nth-child(4) > table > tbody > tr:nth-child(10) > td > input:nth-child(1)"
+# 签到所需要的
+image_code_ajax = "https://hdsky.me/image_code_ajax.php"
+signInUrl = "https://hdsky.me/showup.php"
+
+[BTSchool]
+url = "https://pt.btschool.club/"
+imgUrl = "https://pt.btschool.club/image.php?action=regimage&imagehash="
+signUrl = "https://pt.btschool.club/takelogin.php"
+username = ""
+password = ""
+# 浏览器select
+nameSelect = "#nav_block > form:nth-child(4) > table > tbody > tr:nth-child(1) > td.rowfollow > input[type=text]"
+passwordSelect = "#nav_block > form:nth-child(4) > table > tbody > tr:nth-child(2) > td.rowfollow > input[type=password]"
+verificationSelect = "#nav_block > form:nth-child(4) > table > tbody > tr:nth-child(4) > td:nth-child(2) > input[type=text]:nth-child(1)"
+submitSelect = "#nav_block > form:nth-child(4) > table > tbody > tr:nth-child(9) > td > input:nth-child(1)"
+# 签到所需要的
+signInUrl = "https://pt.btschool.club/index.php?action=addbonus"
+
+[HDHome]
+url = "https://hdhome.org/"
+imgUrl = "https://hdhome.org/image.php?action=regimage&imagehash="
+signUrl = "https://hdhome.org/takelogin.php"
+username = ""
+password = ""
+# 浏览器select
+nameSelect = "#nav_block > form:nth-child(4) > table > tbody > tr:nth-child(1) > td.rowfollow > input[type=text]"
+passwordSelect = "#nav_block > form:nth-child(4) > table > tbody > tr:nth-child(2) > td.rowfollow > input[type=password]"
+verificationSelect = "#nav_block > form:nth-child(4) > table > tbody > tr:nth-child(5) > td:nth-child(2) > input[type=text]:nth-child(1)"
+submitSelect = "#nav_block > form:nth-child(4) > table > tbody > tr:nth-child(10) > td > input:nth-child(1)"
+# 签到所需要的
+signInUrl = "https://hdhome.org/attendance.php"
+
+[BirdIeSearch]
+url = "https://www.birdiesearch.com/"
+signInUrl = "https://www.birdiesearch.com/api/user/reports"
+
+[RenZhe]
+url = "https://renzhe.cloud/user"
+signUrl = "https://renzhe.cloud/auth/login"
+signInUrl = "https://renzhe.cloud/user/checkin"
+username = ""
+password = ''
