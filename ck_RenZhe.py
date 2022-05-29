@@ -94,7 +94,7 @@ class RenZhe:
 
 
 if __name__ == '__main__':
-    j = 3
+    j = 1
     data = get_data()
     _check_items = data.get("RenZhe", [])
     meg = RenZhe(check_items=_check_items).main()
