@@ -144,7 +144,7 @@ class HDHome:
         if r.status_code == 200:
             print(r.text)
             # 签到成功 、已经签到过了
-            msg = re.match(".*签到已得(.*？)点魔力值", r.text, re.S)
+            msg = re.match(".*本次签到获得 <b>(.*?)</b> 个魔力值", r.text, re.S)
             if msg:  # 成功
                 msg = msg.group(1)
             else:
