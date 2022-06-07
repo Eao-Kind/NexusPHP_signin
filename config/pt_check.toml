@@ -56,3 +56,6 @@ signUrl = "https://renzhe.cloud/auth/login"
 signInUrl = "https://renzhe.cloud/user/checkin"
 username = ""
 password = ''
+
+[[IQIYI]]
+cookie = ""
