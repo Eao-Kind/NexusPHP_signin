@@ -17,6 +17,8 @@ class BirdIeSearch:
         self.cookie = get_cookie_by_json("BirdIeSearchCookie")
         self.signInUrl = self.check_items.get("signInUrl")
         self.url = self.check_items.get("url")
+        self.username = self.check_items.get("username")
+        self.password = self.check_items.get("password")
         self.headers = {
             "Host": "www.birdiesearch.com",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -49,7 +51,7 @@ class BirdIeSearch:
 
     def get_cookie_by_requests(self):
         sess = requests.Session()
-        html = sess.post(self.url, headers=self.headers).text
+        html = sess.post(self.url, headers=self.headers,verify=False).text
         form_data = {
             'username': self.username,
             'password': self.password,
@@ -68,7 +70,7 @@ class BirdIeSearch:
         global j
         msg_all = ""
         j += 1
-        if j > 3:  # 防止由于识别出错而导致一直递归
+        if j > 4:  # 防止由于识别出错而导致一直递归
             print("连续失败多次，cookie可能更新不成功！")
             exit(1)
         if not self.check():
