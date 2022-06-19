@@ -188,4 +188,4 @@ if __name__ == '__main__':
     data = get_data()
     _check_items = data.get("HDHome", [])
     meg = HDHome(check_items=_check_items).main()
-    # send("HDSky", meg)
+    send("HDHome", meg)

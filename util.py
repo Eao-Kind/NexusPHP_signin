@@ -3,8 +3,10 @@ from PIL import Image
 import re
 import os
 import json
-# import predict
+from utils import vgg_predict
 import toml
+import requests
+from utils import yolov3_predict
 
 
 def baidu_api(img):
@@ -39,6 +41,8 @@ def verification_code(srt):
         # srt = re.sub("[a-z]", "", srt)  # 去除小写字母，因为验证码不区分大小写
         if len(srt) == 6 and 'Z' not in srt:  # 如果是6个字符则保存，否则为识别错误,改为调用本地模型
             return srt
+        elif (str["error_code"] == 216201):  # 图片错误
+            return "-1"
         else:
             return '0'
     except Exception as e:
@@ -57,8 +61,14 @@ def identify(img):
             f.write(img)  # 保存一下图片，以便百度识别识别
         img = Image.open('temp.png')
         print("本地模型暂时仅有GPU版本，无法调用，请训练cpu")
-        # res = predict.predict(img)
+        res = vgg_predict.predict(img)
+    elif res == "-1":  # 图片错误，可能是请求有问题
+        pass
     return res
+
+
+def yolov3_identify(img):
+    return yolov3_predict.predict(image=img)
 
 
 def get_json_data():  # 获取json里面数据
@@ -121,3 +131,81 @@ def get_cookie_by_json(web_name):
             print(e)
             print(web_name + "获取cookie失败")
             exit(1)
+
+
+def createFs(uid, proxyurl):
+    """
+    创建一个uid实例
+    :param uid: sessionsUid
+    :param url: proxyIP
+    :return: 成功 <Response [200]> 失败 <Response [502]>
+    """
+    # print(uid, url)
+    payload = json.dumps({
+        "cmd": "sessions.create",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+        "session": uid  # 创建个实例
+    })
+    headers = {'Content-Type': 'application/json'}
+    res = requests.request("POST", url=proxyurl, headers=headers, data=payload)
+    print(res)
+    if str(res) == "<Response [200]>":
+        return 1
+    elif str(res) == "<Response [502]>":
+        print("502错误")
+        return 0
+    else:
+        print("创建代理实例出现未知错误")
+        return -1
+
+
+def destroyFs(uid, proxyurl):
+    """
+    创建一个uid实例
+    :param uid: sessionsUid
+    :param url: proxyIP
+    :return: 成功 <Response [200]> 失败 <Response [502]>
+    """
+    payload = json.dumps({
+        "cmd": "sessions.destroy",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+        "session": uid  # 销毁实例
+    })
+    headers = {'Content-Type': 'application/json'}
+    res = requests.request("POST", url=proxyurl, headers=headers, data=payload, allow_redirects=True)
+    print(res)
+    if str(res) == "<Response [200]>":
+        return 1
+    elif str(res) == "<Response [502]>":
+        print("502错误")
+        return 0
+    else:
+        print("销毁代理实例出现未知错误")
+        return -1
+
+
+def fs(url, method, session, proxyurl):
+    print(url, method, session)
+    if session:
+        payload = json.dumps({
+            "cmd": method,
+            "url": url,
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            "session": session,
+        })
+    else:
+        payload = json.dumps({
+            "cmd": method,
+            "url": url,
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+        })
+    headers = {'Content-Type': 'application/json'}
+    res = requests.request("POST", url=proxyurl, headers=headers, data=payload)
+    if str(res) == "<Response [200]>":
+        return res
+    elif str(res) == "<Response [502]>":
+        print("502错误")
+        return 0
+    else:
+        print("代理未知错误")
+        return -1
