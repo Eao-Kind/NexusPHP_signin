@@ -44,7 +44,7 @@ install_alpine_pkgs() {
         if expr "$apk_info" : ".*\s${i}\s.*" >/dev/null; then
             echo "$i 已安装"
         else
-            install 0 "apk add $i" "$(apk add --no-cache "$i" | grep -c 'OK')"
+            install 0 "apk add $i" "$(apk add --no-cache "$i" -i http://pypi.douban.com/simple --trusted-host pypi.douban.com | grep -c 'OK')"
         fi
     done
 }
