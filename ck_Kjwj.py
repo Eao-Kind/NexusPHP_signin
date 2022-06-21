@@ -5,6 +5,7 @@ new Env('科技玩家');
 在登录完成后拿到全部的cookie请求签到会失败，仅需token，但仅有token的cookie请求首页会无法得到登录信息
 """
 
+from notify import *
 from util import *
 import requests
 

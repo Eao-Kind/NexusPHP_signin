@@ -94,3 +94,8 @@ pip3 install numpy==1.14.0 -i http://pypi.douban.com/simple --trusted-host pypi.
 
 修改config/pt_check_sample.toml文件并修改名称为pt_check.toml，然后把该文件放到 /ql/scripts/Eao-Kind_NexusPHP_signin_master/config 里面
 
+
+
+# 其他
+
+网站500错误的异常没有处理
