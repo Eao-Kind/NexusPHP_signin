@@ -99,7 +99,9 @@ class Kjwj:
             msg_all += msg
             return msg_all
         else:
-            print("今天已签到,获得了" + str(res) + "积分")
+            msg = "今天已签到,获得了" + str(res) + "积分"
+            print(msg)
+            return msg
 
 
 if __name__ == '__main__':
