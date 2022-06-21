@@ -1,4 +1,4 @@
-from utils.yolov3.yolov3_utils import *
+from yolov3.yolov3_utils import *
 
 device = torch.device("cpu")
 output_folder = './'

@@ -68,7 +68,12 @@ def identify(img):
 
 
 def yolov3_identify(img):
-    return yolov3_predict.predict(image=img)
+    try:
+        offest = yolov3_predict.predict(image=img)
+        return offest
+    except:
+        print("yolov3识别出错，请查看图片")
+        exit()
 
 
 def get_json_data():  # 获取json里面数据

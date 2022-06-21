@@ -62,7 +62,7 @@ def predict(image):
     if not os.path.exists(model):
         print("错误：未检查到模型文件")
         exit(1)
-    my_cnn.load_state_dict(torch.load('./vgg/16pt.pth'))
+    my_cnn.load_state_dict(torch.load('./vgg/16pt.pth', map_location='cpu'))
     image = transforms(image)  # 这里经过转换后输出的input格式是[C,H,W],网络输入还需要增加一维批量大小B
     image = image.unsqueeze(0)  # 增加一维，输出的img格式为[1,C,H,W]
     # vimage = Variable(image).cuda()
