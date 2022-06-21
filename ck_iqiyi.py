@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-cron: 55 6 * * *
+cron: 5 6 * * *
 new Env('爱奇艺');
 """
 

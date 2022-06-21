@@ -3,10 +3,10 @@ from PIL import Image
 import re
 import os
 import json
-from utils import vgg_predict
+# from utils import vgg_predict
 import toml
 import requests
-from utils import yolov3_predict
+# from utils import yolov3_predict
 
 
 def baidu_api(img):
