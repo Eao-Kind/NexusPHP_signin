@@ -50,6 +50,8 @@ class Kjwj:
         }
         res = requests.post(self.check_items["signUrl"], data=form_data, headers=self.headers)
         print(res.content)
+        if res.status_code == 403:
+            res = requests.post(self.check_items["signUrl"], data=form_data)
         modify_cookie(self.__class__.__name__ + "Authorization", "Bearer " + res.json()["token"])
         msg = modify_cookie(self.__class__.__name__ + "Cookie", "b2_token=" + res.json()["token"])
         return msg
@@ -108,4 +110,4 @@ if __name__ == '__main__':
     data = get_data()
     _check_items = data.get("Kjwj", [])
     meg = Kjwj(check_items=_check_items).main()
-    send("Kjwj", meg)
+    send("科技玩家", meg)
