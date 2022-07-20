@@ -1,6 +1,6 @@
 # Signin
 
-自用、自动签到
+自用
 
 默认环境变量中存在通知信息等环境变量
 
@@ -8,7 +8,8 @@
 
 >  https://github.com/Eao-Kind/NexusPHP_signin.git 
 
-白名单：ck_|ins_
+白名单：ck_|ins_|js_
+依赖文件：USER
 
 执行后
 
