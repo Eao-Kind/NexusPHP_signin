@@ -14,7 +14,8 @@ let ShareInfoBean = '/bean '; // 种豆得豆
 let ShareInfoDdfactory = '/ddfactory '; // 东东工厂
 let ShareInfoHealth = '/health '; // 健康社区
 let ShareInfoJxfactory = '/jxfactory '; // 惊喜工厂
-let ShareInfoSgmh = '/sgmh '
+let ShareInfoSgmh = '/sgmh '; // 闪购盲盒
+let ShareInfoCash = '/Cash ' // 签到领现金
 let ShareInfoLength = 5; // 助力池限制上车5人
 //根据活动汇总
 let activityMap = new Map();
@@ -55,6 +56,8 @@ if ($.isNode()) {
   console.log('工厂ShareInfoJxfactory:' + ShareInfoJxfactory);
   console.log('东东工厂ShareInfoDdfactory:' + ShareInfoDdfactory);
   console.log('健康社区ShareInfoHealth:' + ShareInfoHealth);
+  console.log('闪购盲盒ShareInfoSgmh:' + ShareInfoSgmh);
+  console.log('签到领现金ShareInfoCash:' + ShareInfoCash);
   console.log('结束--------------------------------------------')
 })()
     .catch((e) => {
@@ -63,6 +66,48 @@ if ($.isNode()) {
     .finally(() => {
       $.done();
     })
+
+//领现金
+function getJdCash() {
+  function taskUrl(functionId, body = {}) {
+    return {
+      url: `https://api.m.jd.com/client.action?functionId=${functionId}&body=${escape(JSON.stringify(body))}&appid=CashRewardMiniH5Env&appid=9.1.0`,
+      headers: {
+        'Cookie': cookie,
+        'Host': 'api.m.jd.com',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/json',
+        'Referer': 'http://wq.jd.com/wxapp/pages/hd-interaction/index/index',
+        'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+        'Accept-Language': 'zh-cn',
+        'Accept-Encoding': 'gzip, deflate, br',
+      }
+    }
+  }
+  return new Promise((resolve) => {
+    $.get(taskUrl("cash_mob_home",), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          if (safeGet(data)) {
+            data = JSON.parse(data);
+            if(data.code===0 && data.data.result){
+              console.log(`【京东账号${$.index}（${$.UserName}）签到领现金】${data.data.result.inviteCode}`);
+			  ShareInfoCash += `${data.data.result.inviteCode}`
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
+
 function getJdFactory() {
   return new Promise(resolve => {
     $.post(
@@ -570,7 +615,6 @@ async function getSgmh(timeout = 0) {
             console.log(`【京东账号${$.index}（${$.UserName}）闪购盲盒】${invites && invites[0]['assistTaskDetailVo']['taskToken']}`)
             dealCodeByActivity("sgmh", `${invites && invites[0]['assistTaskDetailVo']['taskToken']}`)
 			ShareInfoSgmh += `${invites && invites[0]['assistTaskDetailVo']['taskToken']}&`;
-
           }
         } catch (e) {
           $.logErr(e, resp);
@@ -725,6 +769,7 @@ async function getShareCode() {
 //   await getCFD()
 //   await getJdCash()
   await getJDHealth()
+  await getJdCash()
   console.log(`======账号${$.index}结束======\n`)
 }
 
