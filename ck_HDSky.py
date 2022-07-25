@@ -154,6 +154,9 @@ class HDSky:
                      "imagehash": imagehash,
                      "imagestring": res,
                      }
+        # 现在不需要图片验证了
+        form_data = {"action": "showup",
+                     }
         r = requests.post(self.signInUrl, headers=self.headers, data=form_data)
         print(r.text)
         res = r.json()
